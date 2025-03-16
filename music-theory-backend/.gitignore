@@ -1,0 +1,49 @@
+# Ignore bundler config
+/.bundle
+
+# Ignore log files
+/log/*
+!/log/.keep
+
+# Ignore temporary files and cache
+/tmp/*
+!/tmp/.keep
+
+# Ignore database files
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/db/schema.rb
+
+# Ignore credentials and secrets
+/config/master.key
+/config/credentials.yml.enc
+
+# Ignore environment-specific files
+.env
+.envrc
+.byebug_history
+
+# Ignore compiled files
+/public/assets
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+/.yarn-integrity
+/.yarn-cache
+
+# Ignore Bootsnap cache
+/tmp/cache/bootsnap/
+
+# Ignore PID and socket files
+/tmp/pids/
+!/tmp/pids/.keep
+/tmp/sockets/
+!/tmp/sockets/.keep
+
+# Ignore system files
+*.swp
+*.swo
+.DS_Store
+*.bak
+*.orig
