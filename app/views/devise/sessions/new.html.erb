@@ -1,0 +1,68 @@
+<div
+  class="
+    min-h-screen
+    flex
+    items-center
+    justify-center
+    bg-gray-100
+    py-12
+    px-4
+    sm:px-6
+    lg:px-8
+  "
+>
+  <div class="max-w-md w-full space-y-8">
+    <!-- Заголовок -->
+    <div class="text-center">
+      <h2 class="text-3xl font-extrabold text-gray-900">
+        Welcome Back!
+      </h2>
+      <p class="mt-2 text-sm text-gray-600">
+        Log in to access your MusicApp dashboard
+      </p>
+    </div>
+    <!-- Форма -->
+    <div class="bg-white py-8 px-6 shadow-lg rounded-xl sm:px-10">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="space-y-5">
+          <!-- Email -->
+          <div>
+            <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
+            <%= f.email_field :email,
+                          autofocus: true,
+                          autocomplete: "email",
+                          class:
+                            "mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-500 transition duration-150" %>
+          </div>
+          <!-- Password -->
+          <div>
+            <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
+            <%= f.password_field :password,
+                             autocomplete: "current-password",
+                             class:
+                               "mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-500 transition duration-150" %>
+          </div>
+          <!-- Remember me -->
+          <% if devise_mapping.rememberable? %>
+            <div class="flex items-center">
+              <%= f.check_box :remember_me,
+                          class:
+                            "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" %>
+              <%= f.label :remember_me, class: "ml-2 block text-sm text-gray-900" %>
+            </div>
+          <% end %>
+          <!-- Submit -->
+          <div>
+            <%= f.submit "Log In",
+                     class:
+                       "w-full flex justify-center py-3 px-4 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700 transition duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+          </div>
+        </div>
+      <% end %>
+      <!-- Ссылки -->
+      <div class="mt-6 text-center text-sm text-gray-600">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>

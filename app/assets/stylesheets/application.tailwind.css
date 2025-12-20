@@ -1,0 +1,6 @@
+@tailwind utilities;
+
+/* Кастомные стили */
+body {
+  @apply bg-gray-100 font-sans text-gray-900;
+}
