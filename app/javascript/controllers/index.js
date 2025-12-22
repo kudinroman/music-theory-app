@@ -9,3 +9,6 @@ application.register("hello", HelloController);
 
 import AbcController from "./abc_controller";
 application.register("abc", AbcController);
+
+import AbcIntervalController from "./abc_interval_controller";
+application.register("abc-interval", AbcIntervalController);

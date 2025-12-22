@@ -5,26 +5,38 @@ export default class extends Controller {
   static targets = ["notation"];
 
   connect() {
-    this.abc = `
+    // Можно сразу показать ноты, либо рендерить по кнопке
+    this.visualObj = null;
+  }
+
+  render() {
+    const abc = `
 X:1
 T:Chord Demo
-M:4/4
-L:1/1
+M:2/4
+L:1/4
 K:C
-"C"[CEG] | "Am"[ACE] | "F"[FAC] | "G"[GBD]
+Q:1/4=200
+C D | E F | G A | B c |
 `;
-    // Рендер нот и сохраняем визуальный объект
-    this.visualObj = ABCJS.renderAbc(this.notationTarget, this.abc)[0];
+    this.visualObj = ABCJS.renderAbc(this.notationTarget, abc)[0];
   }
 
   async play() {
-    // Создаём синтезатор один раз
+    if (!this.visualObj) {
+      console.error("No visualObj to play!");
+      return;
+    }
+
     if (!this.synth) {
       this.synth = new ABCJS.synth.CreateSynth();
-      await this.synth.init({ visualObj: this.visualObj });
+      await this.synth.init({
+        visualObj: this.visualObj,
+        options: { chordsOff: true },
+      });
       await this.synth.prime();
     }
-    // Проигрываем
+
     this.synth.start();
   }
 }

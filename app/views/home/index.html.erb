@@ -1,34 +1,36 @@
 <div>
-  <div class="bg-red-500 text-white p-4">
+  <div class="bg-blue-500 text-white p-4">
     Tailwind работает
   </div>
-
+  <!-- Alpine Player -->
   <div x-data="playerData()">
     <button @click="play()">▶ Play</button>
     <button @click="stop()">■ Stop</button>
+    <div x-show="isPlaying">Плеер играет!</div>
 
-    <div x-show="isPlaying">
-      Плеер играет!
-    </div>
+    <div id="notationPlayer" class="mt-2"></div>
+    <button
+      class="mt-2 px-4 py-2 bg-green-600 text-white rounded"
+      @click="
+        ABCJS.renderAbc('notationPlayer', `
+          X:1
+          K:C
+          [CEG] [ACE] [FAC] [GBD]
+        `)
+      "
+    >
+      Показать аккорды
+    </button>
   </div>
-
-  <div id="notation"></div>
-
-  <button
-    class="mt-4 px-4 py-2 bg-green-600 text-white rounded"
-    onclick="
-    ABCJS.renderAbc('notation', `
-      X:1
-      K:C
-      [CEG] [ACE] [FAC] [GBD]
-    `)
-  "
-  >
-    Показать аккорды
-  </button>
-</div>
-
-<div data-controller="abc">
-  <div data-abc-target="notation"></div>
-  <button data-action="click->abc#play">▶️ Play</button>
+  <!-- Stimulus ABC -->
+  <div data-controller="abc-interval">
+    <div data-abc-interval-target="buttons"></div>
+    <div data-abc-interval-target="feedback" class="mt-2 mb-2"></div>
+    <button
+      data-action="abc-interval#playInterval"
+      class="px-4 py-2 bg-blue-600 text-white rounded"
+    >
+      ▶️ Play Interval
+    </button>
+  </div>
 </div>
