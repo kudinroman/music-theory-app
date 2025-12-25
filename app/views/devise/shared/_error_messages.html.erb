@@ -1,0 +1,10 @@
+<% if resource.errors.any? %>
+  <div class="bg-red-50 border border-red-200 text-red-700 p-4 rounded mb-4">
+    <h3 class="font-semibold mb-2">The following errors prevented saving:</h3>
+    <ul class="list-disc list-inside text-sm">
+      <% resource.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

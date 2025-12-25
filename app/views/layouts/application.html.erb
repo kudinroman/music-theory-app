@@ -1,25 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title><%= content_for(:title) || "Music App" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= yield :head %>
 
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application",
-    "data-turbo-track": "reload",
-    type: "module" %>
+    <%= stylesheet_link_tag "tailwind" %>
+    <%= javascript_include_tag "application", type: "module" %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="min-h-screen bg-gray-50 text-gray-900">
+    <%= render partial: "shared/nav" %>
+    <%= render partial: "devise/shared/flash" %>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <%= yield %>
+    </main>
   </body>
 </html>
