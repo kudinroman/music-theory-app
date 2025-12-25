@@ -3,26 +3,23 @@
     Tailwind работает
   </div>
   <!-- Alpine Player -->
-  <div x-data="playerData()">
-    <button @click="play()">▶ Play</button>
-    <button @click="stop()">■ Stop</button>
-    <div x-show="isPlaying">Плеер играет!</div>
+  <div x-data>
+    <button @click="$store.player.actions.play()">▶ Play</button>
+    <button @click="$store.player.actions.stop()">■ Stop</button>
 
-    <div id="notationPlayer" class="mt-2"></div>
-    <button
-      class="mt-2 px-4 py-2 bg-green-600 text-white rounded"
-      @click="
-        ABCJS.renderAbc('notationPlayer', `
-          X:1
-          K:C
-          [CEG] [ACE] [FAC] [GBD]
-        `)
-      "
-    >
-      Показать аккорды
+    <div x-show="$store.player.store.$isPlaying">
+      Плеер играет!
+    </div>
+  </div>
+
+  <div data-controller="abc">
+    <div data-abc-target="notation"></div>
+
+    <button data-action="abc#play">
+      ▶ Play scale
     </button>
   </div>
-  <!-- Stimulus ABC -->
+
   <div data-controller="abc-interval">
     <div data-abc-interval-target="buttons"></div>
     <div data-abc-interval-target="feedback" class="mt-2 mb-2"></div>

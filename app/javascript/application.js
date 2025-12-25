@@ -1,17 +1,10 @@
-import "./controllers"; // подключаем Stimulus
 import "@hotwired/turbo-rails";
-import { Application } from "@hotwired/stimulus";
+import "./controllers";
 
-// Stimulus
-const application = Application.start();
-window.Stimulus = application;
-
-// Alpine
+// AlpineJS
 import Alpine from "alpinejs";
-import { player } from "./stores/player";
-
+import "./alpine/init";
 window.Alpine = Alpine;
-Alpine.data("playerData", () => player);
 Alpine.start();
 
 // ABCJS

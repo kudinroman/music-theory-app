@@ -26,8 +26,8 @@ export default class extends Controller {
         `
 X:${index + 1}
 T:${name}
-M:2/4
-L:1/4
+M:4/4
+L:4/4
 K:C
 [${this.intervals[name]}] |
 `,
@@ -51,8 +51,8 @@ K:C
     const abcNotation = `
 X:1
 T:Interval
-M:2/4
-L:1/4
+M:4/4
+L:4/4
 K:C
 [${this.intervals[intervalName]}] |
 `;
