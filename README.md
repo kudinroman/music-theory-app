@@ -1,24 +1,9 @@
-# README
+## Project context (for humans & AI)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails 3.2 backend.
+JavaScript is bundled with esbuild.
+Tailwind CSS is built separately.
+Assets are served via Sprockets (delivery only).
+Local development is run via `bin/dev`.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+No Webpacker. No Importmap.
