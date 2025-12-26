@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin</title>
+  <%= stylesheet_link_tag "tailwind" %>
+</head>
+<body class="bg-gray-100">
+  <nav class="bg-white shadow p-4 flex gap-4">
+    <%= link_to "Dashboard", admin_root_path %>
+    <%= link_to "Blocks", admin_blocks_path %>
+    <%= link_to "Users", admin_users_path %>
+    <%= link_to "Back", root_path %>
+  </nav>
+
+  <main class="p-6">
+    <%= yield %>
+  </main>
+</body>
+</html>

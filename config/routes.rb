@@ -16,9 +16,9 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "dashboard#index"
     resources :users
+
+    resources :blocks do
+      resources :lessons
+    end
   end
-
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end

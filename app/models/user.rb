@@ -7,4 +7,7 @@ class User < ActiveRecord::Base
   def admin?
     role == "admin"
   end
+
+  has_many :lesson_progresses, dependent: :destroy
+  has_many :lessons, through: :lesson_progresses
 end
