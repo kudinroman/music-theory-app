@@ -1,0 +1,31 @@
+<h1 class="text-2xl font-bold mb-4">Blocks</h1>
+
+<%= link_to "New Block",
+    new_admin_block_path,
+    class: "bg-indigo-600 text-white px-4 py-2 rounded" %>
+
+<table class="mt-6 w-full border">
+  <thead>
+    <tr class="bg-gray-100">
+      <th class="p-2 text-left">Title</th>
+      <th class="p-2 text-left">Status</th>
+      <th class="p-2 text-left">Lessons</th>
+      <th class="p-2 text-right">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @blocks.each do |block| %>
+      <tr class="border-b">
+        <td class="p-2"><%= block.title %></td>
+        <td class="p-2"><%= block.status %></td>
+        <td class="p-2">
+          <%= link_to "Lessons (#{block.lessons.count})", admin_block_lessons_path(block) %>
+        </td>
+        <td class="p-2 text-right">
+          <%= link_to "Edit", edit_admin_block_path(block), class: "text-indigo-600" %>
+          <%= link_to "Delete", admin_block_path(block), method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-600 ml-2" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

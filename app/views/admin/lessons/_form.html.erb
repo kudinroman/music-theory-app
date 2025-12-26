@@ -1,0 +1,31 @@
+<%= form_with(model: [:admin, @block, lesson], local: true) do |f| %>
+  <div class="space-y-4 max-w-xl">
+    <div>
+      <%= f.label :title, class: "block font-medium" %>
+      <%= f.text_field :title, class: "w-full border rounded px-3 py-2" %>
+    </div>
+
+    <div>
+      <%= f.label :description %>
+      <%= f.text_area :description, class: "w-full border rounded px-3 py-2" %>
+    </div>
+
+    <div>
+      <%= f.label :status %>
+      <%= f.select :status, Lesson.statuses.keys, {}, class: "w-full border rounded px-3 py-2" %>
+    </div>
+
+    <div>
+      <%= f.label :position %>
+      <%= f.number_field :position, class: "w-full border rounded px-3 py-2" %>
+    </div>
+
+    <div>
+      <%= f.label :data, "Lesson data (JSON)" %>
+      <%= f.text_area :data, value: lesson.data_pretty, rows: 10,
+          class: "w-full font-mono border rounded px-3 py-2" %>
+    </div>
+
+    <%= f.submit class: "bg-green-600 text-white px-6 py-2 rounded" %>
+  </div>
+<% end %>
