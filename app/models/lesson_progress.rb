@@ -7,4 +7,6 @@ class LessonProgress < ApplicationRecord
     in_progress: 1,
     completed: 2
   }
+
+  scope :for_user, ->(user) { where(user_id: user.id) }
 end

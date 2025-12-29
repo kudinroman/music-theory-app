@@ -25,8 +25,9 @@ class Lesson < ApplicationRecord
   end
 
   def data_pretty
-    return "" if data.blank?
+    return '' if data.blank?
     return JSON.pretty_generate(data) if data.is_a?(Hash)
+
     data.to_s
   end
 end
