@@ -46,6 +46,6 @@ class Admin::LessonsController < Admin::BaseController
 
   def lesson_params
     params.require(:lesson)
-          .permit(:title, :description, :status, :position, data: {})
+          .permit(:title, :description, :status, :position, :data)
   end
 end

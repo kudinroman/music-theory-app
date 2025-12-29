@@ -1,5 +1,6 @@
 import "@hotwired/turbo-rails";
 import "./controllers";
+import "./ace_editor";
 
 // AlpineJS
 import Alpine from "alpinejs";
