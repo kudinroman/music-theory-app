@@ -1,0 +1,34 @@
+<div class="max-w-4xl mx-auto px-4 py-6 space-y-8">
+  <section class="space-y-6">
+    <h2 class="text-xl font-bold text-gray-900">Курс</h2>
+
+    <% @blocks.each do |block| %>
+      <div class="bg-white rounded-lg shadow p-4">
+        <h3 class="text-lg font-semibold text-gray-800">
+          <%= block.title %>
+        </h3>
+
+        <ul class="mt-4 space-y-3">
+          <% block.lessons.each do |lesson| %>
+            <% progress = lesson.lesson_progresses.find { |p| p.user_id == current_user.id } %>
+
+            <li class="flex items-center justify-between gap-3">
+              <%= link_to lesson.title,
+                    block_lesson_path(block, lesson),
+                    class: "text-indigo-600 hover:underline text-sm md:text-base" %>
+
+              <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium
+                <%= case progress&.status
+                    when "completed" then "bg-green-100 text-green-800"
+                    when "in_progress" then "bg-blue-100 text-blue-800"
+                    else "bg-gray-100 text-gray-700"
+                end %>">
+                <%= (progress&.status || "not_started")&.humanize %>
+              </span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </section>
+</div>

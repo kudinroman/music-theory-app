@@ -1,0 +1,59 @@
+<div class="max-w-4xl mx-auto px-4 py-6 space-y-8">
+ <!-- ===== Lesson header ===== -->
+  <header>
+    <h1 class="text-2xl md:text-3xl font-bold text-gray-900">
+      <%= @lesson.title %>
+    </h1>
+
+    <p class="mt-2 text-sm text-gray-500">
+      Текущий статус:
+      <span class="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium
+        <%= case @progress.status
+            when "completed" then "bg-green-100 text-green-800"
+            when "in_progress" then "bg-blue-100 text-blue-800"
+            else "bg-gray-100 text-gray-700"
+        end %>">
+        <%= @progress&.status&.humanize %>
+      </span>
+    </p>
+  </header>
+
+  <!-- ===== Status form ===== -->
+  <section class="bg-white rounded-lg shadow p-4 space-y-4">
+    <h2 class="font-semibold text-gray-800">Изменить статус</h2>
+
+    <%= form_with url: update_status_lesson_path(@lesson),
+                  method: :patch,
+                  class: "flex flex-col sm:flex-row gap-3 items-start sm:items-center" do %>
+
+      <%= select_tag :status,
+            options_for_select(
+              LessonProgress.statuses.keys.map { |s| [s.humanize, s] },
+              @progress.status
+            ),
+            class: "w-full sm:w-auto border rounded px-3 py-2 text-sm" %>
+
+      <%= submit_tag "Сохранить",
+            class: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded text-sm" %>
+    <% end %>
+
+    <!-- Quick actions -->
+    <div class="flex flex-col sm:flex-row gap-2 pt-2">
+      <%= button_to "▶ Не начато",
+            update_status_lesson_path(@lesson, status: :not_started),
+            method: :patch,
+            class: "w-full sm:w-auto bg-blue-100 hover:bg-blue-200 text-blue-800 px-4 py-2 rounded text-sm" %>
+
+      <%= button_to "▶ В процессе",
+            update_status_lesson_path(@lesson, status: :in_progress),
+            method: :patch,
+            class: "w-full sm:w-auto bg-blue-100 hover:bg-blue-200 text-blue-800 px-4 py-2 rounded text-sm" %>
+
+      <%= button_to "✓ Завершено",
+            update_status_lesson_path(@lesson, status: :completed),
+            method: :patch,
+            class: "w-full sm:w-auto bg-green-100 hover:bg-green-200 text-green-800 px-4 py-2 rounded text-sm" %>
+    </div>
+  </section>
+  <%= link_to "Back", blocks_path(@block), class: "text-blue-600 mt-4 inline-block" %>
+</div>
