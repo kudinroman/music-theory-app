@@ -10,13 +10,15 @@
   "scripts": {
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/tailwind.css",
     "watch:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/tailwind.css --watch",
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
+    "build": "esbuild app/javascript/application.js --bundle --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.svg=file --loader:.png=file --loader:.woff=file --loader:.woff2=file --sourcemap=external",
+    "watch": "esbuild app/javascript/application.js --bundle --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.svg=file --loader:.png=file --loader:.woff=file --loader:.woff2=file --sourcemap=external --watch"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.20",
     "@tailwindcss/cli": "^4.1.18",
     "abcjs": "^6.5.2",
+    "ace-builds": "^1.43.5",
     "alpinejs": "^3.15.3",
     "effector": "^23.4.4"
   }

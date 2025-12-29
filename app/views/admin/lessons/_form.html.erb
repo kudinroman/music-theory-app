@@ -22,8 +22,8 @@
 
     <div>
       <%= f.label :data, "Lesson data (JSON)" %>
-      <%= f.text_area :data, value: lesson.data_pretty, rows: 10,
-          class: "w-full font-mono border rounded px-3 py-2" %>
+      <div data-ace-json-editor data-ace-input="lesson_data" class="border rounded min-h-[300px]"></div>
+      <%= f.hidden_field :data, id: "lesson_data", value: lesson.data_pretty || "{}" %>
     </div>
 
     <%= f.submit class: "bg-green-600 text-white px-6 py-2 rounded" %>
