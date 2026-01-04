@@ -5,8 +5,15 @@ import {
   sample,
   combine,
 } from "effector";
-import { NOTE_LOCALES } from "./note_locales";
-import { shuffle } from "lodash";
+import { shuffle, keys } from "lodash";
+
+import { NOTE_LOCALES } from "../shared/note_locales";
+import { randomDuration } from "../shared/durations";
+import { generateAllNotesLocalized } from "../shared/generateAllNotesLocalized";
+import { toAbc } from "../shared/to_abc";
+import { getClef } from "../shared/getClef";
+
+const ALL_NOTES = Object.keys(generateAllNotesLocalized("ru"));
 
 export const startGame = createEvent();
 export const answerClick = createEvent();
@@ -17,11 +24,30 @@ export const changeNoteLocale = createEvent();
 export const renderNotesFx = createEffect(({ element, notes }) => {
   if (!window.ABCJS || !element) return;
 
+  const currentNotes = shuffle(ALL_NOTES)
+    .slice(0, 3)
+    .map((note) => ({
+      note,
+      duration: randomDuration(), // "1/2", "1/4", "1" и т.д.
+    }));
+
+  // Генерируем ABCJS ноты в одну строку
+  const abcNotes = currentNotes
+    .map(({ note, duration }) => {
+      const clef = getClef(note); // функция возвращает "bass" или "treble"
+      const abcNote = toAbc(note, duration);
+      // ABCJS позволяет менять ключ через [K:C clef=...] перед нотой
+      return `[K:C clef=${clef}]${abcNote}`;
+    })
+    .join(" "); // объединяем через пробел
+
+  // Формируем полноценный ABCJS код
   const abc = `X:1
 M:4/4
 L:1/4
-K:C
-${notes.map((n) => `${n}4`).join(" ")}|`;
+${abcNotes} |`;
+
+  console.log("ABCJS code:\n", abc);
 
   element.innerHTML = "";
 
@@ -39,7 +65,7 @@ ${notes.map((n) => `${n}4`).join(" ")}|`;
 });
 
 const $noteGuess = createStore({
-  notes: ["C", "D", "E", "F", "G", "A", "B"],
+  notes: keys(NOTE_LOCALES.ru),
   currentNotes: [],
   correctNote: null,
   correct: 0,
