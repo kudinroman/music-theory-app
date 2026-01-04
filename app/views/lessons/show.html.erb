@@ -1,4 +1,4 @@
-<div class="max-w-4xl mx-auto px-4 py-6 space-y-8">
+<div class="hidden max-w-4xl mx-auto px-4 py-6 space-y-8">
  <!-- ===== Lesson header ===== -->
   <header>
     <h1 class="text-2xl md:text-3xl font-bold text-gray-900">
@@ -56,4 +56,84 @@
     </div>
   </section>
   <%= link_to "Back", blocks_path(@block), class: "text-blue-600 mt-4 inline-block" %>
+</div>
+
+
+
+
+<div class="max-w-xl mx-auto mt-8" x-data>
+  <h1 class="text-2xl font-bold text-center mb-4">
+    Guess the note 🎵
+  </h1>
+
+  <div class="flex justify-center mb-4">
+    <button
+      class="px-4 py-2 bg-blue-600 text-white rounded"
+      @click="$store.noteGuess.actions.startGame()"
+    >
+      Start game
+    </button>
+  </div>
+
+  <div class="text-center text-3xl font-semibold mb-2">
+    <p class="mb-5">Выберите ноту</p>
+    <p class="text-5xl text-blue-600" x-text="$store.noteGuess.store.$correctNoteLocalized || '—'"></p>
+  </div>
+
+
+  <div
+    id="note-guess-notation"
+    class="border rounded p-3 mb-4 bg-white"
+    style="min-height: 120px"
+  ></div>
+
+  <div class="flex justify-between text-sm mb-2">
+    <span class="text-green-600">
+      Правильно:
+      <strong x-text="$store.noteGuess.store.$noteGuess.correct"></strong>
+    </span>
+    <span class="text-red-600">
+      Неверно:
+      <strong x-text="$store.noteGuess.store.$noteGuess.incorrect"></strong>
+    </span>
+  </div>
+
+  <p class="text-center text-sm mb-3">
+    ⏱ Время:
+    <strong x-text="$store.noteGuess.store.$noteGuess.timeLeft"></strong> сек
+  </p>
+
+  <div class="w-full h-3 bg-gray-200 rounded mb-4 overflow-hidden">
+    <div
+      class="h-3 bg-green-500 transition-all"
+      :style="{
+        width: (
+          $store.noteGuess.store.$noteGuess.correct /
+          (($store.noteGuess.store.$noteGuess.correct + $store.noteGuess.store.$noteGuess.incorrect) || 1) *
+          100
+        ) + '%'
+      }"
+    ></div>
+  </div>
+
+  <p class="text-center text-sm mb-4">
+    🏆 Лучший результат:
+    <strong x-text="$store.noteGuess.store.$noteGuess.bestResult"></strong>
+  </p>
+
+  <p class="text-center font-bold mt-4" x-show="$store.noteGuess.store.$noteGuess.timeLeft <= 0">
+    ⏰ Время вышло!
+  </p>
+
+  <div class="flex justify-center gap-3 mt-2">
+    <button
+      class="px-4 py-2 bg-yellow-500 text-white rounded"
+      x-show="$store.noteGuess.store.$noteGuess.timeLeft <= 0"
+      @click="$store.noteGuess.actions.restartGame(); $store.noteGuess.actions.startGame()"
+    >
+      Restart
+    </button>
+    <button class="cursor-pointer" @click="$store.noteGuess.actions.changeNoteLocale('ru')">RU</button>
+    <button class="cursor-pointer" @click="$store.noteGuess.actions.changeNoteLocale('en')">EN</button>
+  </div>
 </div>

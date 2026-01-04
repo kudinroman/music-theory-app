@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+@layer utilities {
+  .abcjs-note {
+    cursor: pointer;
+    pointer-events: bounding-box;
+  }
+
+  .abcjs-note:hover {
+    color: green;
+  }
+
+  .abcjs-note * {
+    pointer-events: none;
+  }
+
+  .abcjs-sheet-music {
+    font-size: 1.5rem;
+    height: 250px;
+    color: red;
+  }
+}
