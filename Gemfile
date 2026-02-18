@@ -63,4 +63,4 @@ end
 gem "coderay"
 gem "method_source"
 
-gem "devise", "~> 4.9"
+gem "devise", "~> 5.0"
